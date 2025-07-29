@@ -1,0 +1,4 @@
+streamlit
+swisseph
+pytz
+geopy
