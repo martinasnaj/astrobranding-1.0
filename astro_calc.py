@@ -1,5 +1,4 @@
 import streamlit as st
-from astro_calc import calculate_positions
 from branding_logic import generate_branding
 
 st.title("🌟 Astrobranding – Tvá hvězdná značka")
