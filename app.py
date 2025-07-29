@@ -1,4 +1,3 @@
-
 import streamlit as st
 from astro_calc import calculate_positions
 from branding_logic import generate_branding
@@ -6,9 +5,9 @@ from branding_logic import generate_branding
 st.title("🌟 Astrobranding – Tvá hvězdná značka")
 
 name = st.text_input("Jméno")
-date = st.text_input("Datum narození (DD.MM.RRRR)")
+date = st.text_input("Datum narození (RRRR-MM-DD)")
 time = st.text_input("Čas narození (HH:MM)")
-place = st.text_input("Místo narození")
+place = st.text_input("Místo narození (prozatím fixně Praha)")
 
 if st.button("Získat značku"):
     sun, moon, asc = calculate_positions(date, time, place)
