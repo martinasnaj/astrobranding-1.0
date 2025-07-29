@@ -1,30 +1,22 @@
-from flatlib.chart import Chart
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
+import streamlit as st
+from branding_logic import generate_branding
 
-ZODIAC = {
-    'ARIES': 'Beran',
-    'TAURUS': 'Býk',
-    'GEMINI': 'Blíženci',
-    'CANCER': 'Rak',
-    'LEO': 'Lev',
-    'VIRGO': 'Panna',
-    'LIBRA': 'Váhy',
-    'SCORPIO': 'Štír',
-    'SAGITTARIUS': 'Střelec',
-    'CAPRICORN': 'Kozoroh',
-    'AQUARIUS': 'Vodnář',
-    'PISCES': 'Ryby'
-}
+st.title("🌟 Astrobranding – Tvá hvězdná značka")
 
-def get_sign(obj):
-    return ZODIAC.get(obj.sign, obj.sign)
+name = st.text_input("Jméno")
+date = st.text_input("Datum narození (RRRR-MM-DD)")
+time = st.text_input("Čas narození (HH:MM)")
+place = st.text_input("Místo narození (prozatím fixně Praha)")
 
-def calculate_positions(date_str, time_str, place):
-    pos = GeoPos('50.0755', '14.4378')  # Praha zatím fixně
-    dt = Datetime(date_str, time_str, '+01:00')
-    chart = Chart(dt, pos)
-    sun = chart.get('SUN')
-    moon = chart.get('MOON')
-    asc = chart.get('ASC')
-    return get_sign(sun), get_sign(moon), get_sign(asc)
+if st.button("Získat značku"):
+    sun, moon, asc = calculate_positions(date, time, place)
+    word, phrase = generate_branding(sun, moon, asc)
+    st.markdown(f"## 🌠 {name}")
+    st.write(f"**Slunce:** {sun}")
+    st.write(f"**Luna:** {moon}")
+    st.write(f"**Ascendent:** {asc}")
+    st.markdown(f"### ✨ Značka duše: *{word}*")
+    st.markdown(f"---\n**Poselství:** {phrase}")
+
+
+
